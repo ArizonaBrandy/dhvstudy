@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: regular;
+    font-size: 200px;
+    color: #AD4801;
+}
+
+.aboutContext{
+    font-size: 24px;
+    width: 90%;
+    color: #AD4801;
+
+    text-align: justify;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: #F6E7D4;
+}
+
+.header{
+    width: 100%;
+    height: 90%;
+    overflow: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
+.footer{
+    width: 100%;
+    height: 10%;
+    border-top: 1px solid #AD4801;
+    color: #AD4801;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 1rem;
+}
+
+.footerButton:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
