@@ -1,17 +1,14 @@
 import styles from './Homepage.module.css';
 import dhvsuimage from '../../assets/dhvstudypic.png';
-import { useNavigate } from "react-router-dom";
 
-function Homepage({user}){
-
-    const navigate = useNavigate();
+function Homepage(){
 
     return(
         <>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <span style={{fontSize: '2rem', color: '#9b3e01', cursor: "pointer"}} onClick={() => navigate("/settings")}>DHVSTUDY</span>
-                    <span style={{fontSize: '1rem', color: '#9b3e01', fontWeight: 'bold', cursor: 'pointer'}} onClick={() => navigate("/forums")}>FORUMS</span>
+                    <span style={{fontSize: '2rem', color: '#9b3e01'}}>DHVSTUDY</span>
+                    <span style={{fontSize: '1rem', color: '#9b3e01', fontWeight: 'bold', cursor: 'pointer'}}>FORUMS</span>
                 </div>
                 <div className={styles.middle}>
                     <div className={styles.leftBox}>

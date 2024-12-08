@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(246, 231, 212, 1);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.footer{
+    width: 100%;
+    height: 10%;
+    border-top: 1px solid #AD4801;
+    color: #AD4801;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 1rem;
+}
+
+.middle{
+    width: 70em;
+    height: 20em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftBox{
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.headerCard{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonHolder{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.createButton, .roomsButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.createButton{
+    width: 40%;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #AD4801;
+    font-size: 2rem;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.createButton:hover{
+    background-color: rgba(246, 231, 212, 1);
+    border: 1px solid #AD4801;
+    color: #9b3e01;
+}
+
+.roomsButton{
+    width: 40%;
+    padding: 2rem;
+    border-radius: 1rem;
+    font-size: 2rem;
+    color: #AD4801;
+    border: 1px solid #AD4801;
+    transition: background-color 0.3s ease;
+}
+
+.roomsButton:hover{
+    background-color: #AD4801;
+    color: white;
+}
+
+.rightBox{
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+

@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(246, 231, 212, 1);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.footer{
+    width: 100%;
+    height: 10%;
+    border-top: 1px solid #AD4801;
+    color: #AD4801;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 1rem;
+}
+
+.middle{
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.middleContainer{
+    width: 70%;
+    height: 100%;
+    border-radius: 1rem;
+    background-color: #AD4801;
+    display: flex;
+    flex-direction: row;
+}
+
+.dhvsu{
+    width: 3em;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.leftCard{
+    width: 30%;
+    height: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.cardBox{
+    border-radius: 1rem;
+    width: 100%;
+    background-color: rgba(246, 231, 212, 1);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardBox span {
+    width: 100%;
+    font-size: 2.5rem;
+    padding: 1rem 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #AD4801;
+    cursor: pointer;
+    text-align: center;
+    background-color: transparent; /* Set a default background */
+  }
+  
+
+.cardBox span:hover {
+    background-color: #AD4801;
+    color: rgba(246, 231, 212, 1);
+}
+
+.rightCard{
+    width: 70%;
+    height: 100%;
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+
+.cardBox span.isActive {
+    background-color: #AD4801 !important;
+    color: rgba(246, 231, 212, 1) !important;
+}
+
+.settings{
+    width: 100%;
+    height: auto;
+    background-color: rgba(246, 231, 212, 1);
+    padding: 5rem;
+    border-radius: 1rem;
+}
+
+.logoutHolder{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoutButton{
+    padding: .5rem 1rem;
+    background-color: #AD4801;
+    color: rgba(246, 231, 212, 1);
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.logoutButton:hover{
+    background-color: rgba(211, 156, 112, 1);
+    color: #AD4801;
+}
+  
+  
+
+
+
+
