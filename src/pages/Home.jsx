@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styles from "./Home.module.css";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase/firebase"; // Ensure this is correctly configured
+import { auth, db } from "../firebase/firebase"; // Ensure this is correctly configured
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 function Home() {
   const [loginModal, setLoginModal] = useState(false);
@@ -32,7 +33,30 @@ function Home() {
 
   const handleRegister = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+
+      const domain = "@dhvsu.edu.ph";
+      if (!email.endsWith(domain)) {
+        alert(`Invalid email. Only ${domain} emails are allowed.`);
+        return;
+      }
+
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  
+      // Get the user's unique ID
+      const userId = userCredential.user.uid;
+  
+      // Add user data to Firestore
+      const userDoc = {
+        username: "Guest",
+        profileImage: "",
+        about: "",
+        email: email,
+        id: userId,
+      };
+  
+      await setDoc(doc(db, "users", userId), userDoc);
+  
       alert("Account created successfully!");
       setRegisterModal(false);
       resetForm();
@@ -40,6 +64,7 @@ function Home() {
       setError(err.message);
     }
   };
+  
 
   const handleLogin = async () => {
     try {
@@ -50,6 +75,8 @@ function Home() {
       setError(err.message);
     }
   };
+
+  
 
   return (
     <>
