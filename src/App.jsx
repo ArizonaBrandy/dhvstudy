@@ -8,6 +8,7 @@ import Homepage from './pages/landingpages/Homepage'
 import Forums from './pages/landingpages/Forums'
 import Settings from './pages/landingpages/Settings';
 import PrivateRoute from './components/PrivateRoute';
+import ForumPost from './pages/landingpages/ForumPost';
 
 function App(){
 
@@ -36,6 +37,7 @@ function App(){
           <Route path="/home" element={<PrivateRoute><Homepage user={user}/></PrivateRoute>}/>
           <Route path="/forums" element={ <PrivateRoute><Forums user={user}/></PrivateRoute>}/>
           <Route path="/settings" element={<PrivateRoute><Settings user={user}/></PrivateRoute>}/>
+          <Route path="/forumpost" element={<PrivateRoute><ForumPost user={user}/></PrivateRoute>}/>
         </Routes>
       </BrowserRouter>
     </>

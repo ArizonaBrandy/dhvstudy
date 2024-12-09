@@ -3,7 +3,7 @@ import dhvsuimage from '../../assets/dhvstudypic.png';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/firebase';
-import { onSnapshot, collection, addDoc, doc, getDoc } from 'firebase/firestore';
+import { onSnapshot, collection, addDoc, doc, getDoc, orderBy, query } from 'firebase/firestore';
 
 function Forums({ user }) {
     const [isModalCreate, setIsModalCreate] = useState(false);
@@ -42,15 +42,16 @@ function Forums({ user }) {
     // Fetch forum posts
     useEffect(() => {
         const forumpostsRef = collection(db, "forumposts");
-
-        const unsubscribe = onSnapshot(forumpostsRef, (snapshot) => {
+        const sortedQuery = query(forumpostsRef, orderBy("createdAt", "desc")); // Sort by createdAt in descending order
+    
+        const unsubscribe = onSnapshot(sortedQuery, (snapshot) => {
             const fetchedPosts = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
             setPosts(fetchedPosts);
         });
-
+    
         return () => unsubscribe();
     }, []);
 
@@ -110,7 +111,7 @@ function Forums({ user }) {
                     </div>
                     <div className={styles.postHolder}>
                         {posts.map((post) => (
-                            <div key={post.id} className={styles.post}>
+                            <div key={post.id} className={styles.post} onClick={() => navigate(`/forumpost?id=${post.id}`)}>
                                 <span>{post.uploader || 'Anonymous'}</span>
                                 <span>{post.subject || 'No subject provided'}</span>
                             </div>
