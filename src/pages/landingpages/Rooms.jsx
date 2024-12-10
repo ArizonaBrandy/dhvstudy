@@ -137,7 +137,7 @@ function Rooms({user}){
                         <div 
                             key={room.id} 
                             className={styles.roomCard} 
-                            onClick={() => navigate(`/room/${room.id}`)} // Navigate to the room's page
+                            onClick={() => navigate(`/room?id=${room.id}`)} 
                         >
                             <img 
                                 src={room.roomImage || noImage} 

@@ -62,20 +62,20 @@
     flex-direction: column;
 }
 
-.buttonHolder{
+.buttonHolder2{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.createButton, .roomsButton{
+.createButton2, .roomsButton{
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
 
-.createButton{
+.createButton2{
     width: 40%;
     padding: 2rem;
     border-radius: 1rem;
@@ -111,4 +111,123 @@
     height: 100%;
     object-fit: cover;
 }
+
+.plusModal{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modalContent {
+    width: 40em;
+    height: auto;
+    background: linear-gradient(to bottom, rgba(246, 231, 212, 1), rgba(231, 172, 132, 1));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+
+    position: relative;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.headerModal{
+    font-size: 2rem;
+    color: #AD4801;
+}
+
+.uploadImageHolder{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+}
+
+.uploadImageHolder i{
+    font-size: 2rem;
+    background-color: #AD4801;
+    padding: 1rem;
+    color: rgba(246, 231, 212, 1);
+    border-radius: 50%;
+}
+
+.uploadImageHolder span{
+    color: #AD4801;
+    font-family: "Poppins", sans-serif;
+}
+
+.bothHolder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 1rem;
+}
+
+.inputHolder{
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #AD4801;
+    font-family: "Poppins", sans-serif;
+}
+
+.inputHolder input{
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.inputHolder input::placeholder{
+    color: rgba(231, 172, 132, 1);
+}
+
+.buttonHolder{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cancelButton, .createButton{
+    padding: .5rem 1rem;
+    color: #AD4801;
+    background-color: #F6E7D4;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover, .createButton:hover{
+    background-color: rgba(246, 231, 212, .5);
+}
+
+.uploadLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 
