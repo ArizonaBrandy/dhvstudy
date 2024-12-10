@@ -1,0 +1,228 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(246, 231, 212, 1);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+    position: relative;
+}
+
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #AD4801;
+}
+
+.middle {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(246, 231, 212, 1);
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+    gap: 1rem;
+    flex-wrap: nowrap; /* Prevents wrapping to the next line */
+    overflow-x: auto;  /* Adds a horizontal scrollbar if content overflows */
+}
+
+
+.dhvsu{
+    width: 3em;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.plusHolder{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plusHolder i{
+    font-size: 3rem;
+    color:rgba(246, 231, 212, 1);
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    background-color: #AD4801;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.plusHolder i:hover {
+    transform: scale(1.1);
+}
+
+.roomCard{
+    width: 24em;
+    height: 20em;
+    background-color: #AD4801;
+    border-radius: 1rem;
+    cursor: pointer;
+    flex: 0 0 auto;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.roomImage{
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
+.textHolder{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textHolder span{
+    color: rgba(246, 231, 212, 1);
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: "Poppins", sans-serif;
+}
+
+.plusModal{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modalContent {
+    width: 40em;
+    height: auto;
+    background: linear-gradient(to bottom, rgba(246, 231, 212, 1), rgba(231, 172, 132, 1));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+
+    position: relative;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.headerModal{
+    font-size: 2rem;
+    color: #AD4801;
+}
+
+.uploadImageHolder{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+}
+
+.uploadImageHolder i{
+    font-size: 2rem;
+    background-color: #AD4801;
+    padding: 1rem;
+    color: rgba(246, 231, 212, 1);
+    border-radius: 50%;
+}
+
+.uploadImageHolder span{
+    color: #AD4801;
+    font-family: "Poppins", sans-serif;
+}
+
+.bothHolder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 1rem;
+}
+
+.inputHolder{
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #AD4801;
+    font-family: "Poppins", sans-serif;
+}
+
+.inputHolder input{
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.inputHolder input::placeholder{
+    color: rgba(231, 172, 132, 1);
+}
+
+.buttonHolder{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cancelButton, .createButton{
+    padding: .5rem 1rem;
+    color: #AD4801;
+    background-color: #F6E7D4;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover, .createButton:hover{
+    background-color: rgba(246, 231, 212, .5);
+}
+
+.uploadLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

@@ -21,7 +21,7 @@ function Homepage({user}){
                         </div>
                         <div className={styles.buttonHolder}>
                             <div className={styles.createButton}>create room</div>
-                            <div className={styles.roomsButton}>rooms</div>
+                            <div className={styles.roomsButton} onClick={() => navigate("/rooms")}>rooms</div>
                         </div>
                     </div>
                     <img src={dhvsuimage} alt="Image" className={styles.rightBox} />
