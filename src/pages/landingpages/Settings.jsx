@@ -124,6 +124,20 @@ function Settings({ user }) {
         }
     };    
 
+    const calculateTimeDifference = (createdAt) => {
+        const createdDate = new Date(createdAt.seconds * 1000); 
+        
+        const currentTime = new Date();
+        const diffInMs = currentTime - createdDate; 
+
+        const diffInMinutes = Math.floor(diffInMs / 1000 / 60); 
+        const hours = Math.floor(diffInMinutes / 60); 
+        const minutes = diffInMinutes % 60; 
+
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        return formattedTime;
+    };
+
     return (
         <>
             <div className={styles.container}>
@@ -239,7 +253,7 @@ function Settings({ user }) {
                                                 <div className={styles.timeHolder}>
                                                     <i className="fa-solid fa-clock"></i>
                                                     <span>
-                                                        {`Created ${Math.floor((new Date() - new Date(currentUser.createdAt.toDate())) / (1000 * 60 * 60 * 24))} days ago`}
+                                                        {currentUser?.createdAt ? calculateTimeDifference(currentUser.createdAt) : "N/A"}
                                                     </span>
                                                 </div>
                                             </div>
