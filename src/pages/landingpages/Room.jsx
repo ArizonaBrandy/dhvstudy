@@ -4,7 +4,7 @@ import { auth, db } from "../../firebase/firebase";
 import { doc, getDoc, onSnapshot, updateDoc, deleteDoc, arrayRemove } from "firebase/firestore";
 import styles from "./Room.module.css";
 import defaultProfile from "../../assets/defaultProfile.jpg";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function Room({ user }) {
