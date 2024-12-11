@@ -344,7 +344,7 @@
     text-align: center;
     font-size: 1.5rem;
     font-family: "Poppins", sans-serif;
-    color: var(--body_color);
+    color: var(--body_colorDark);
 }
 
 .timeHolder{
