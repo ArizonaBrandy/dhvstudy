@@ -5,6 +5,7 @@ import { doc, getDoc, onSnapshot, updateDoc, deleteDoc, arrayRemove } from "fire
 import styles from "./Room.module.css";
 import defaultProfile from "../../assets/defaultProfile.jpg";
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Room({ user }) {
     const [roomId, setRoomId] = useState("");
@@ -232,6 +233,7 @@ function Room({ user }) {
 
     return (
         <>
+            <ToastContainer/>
             {isUserOwner || hasAccess ? (
                 <div className={styles.container}>
                     <div className={styles.header}>
@@ -303,7 +305,19 @@ function Room({ user }) {
                         ) : (
                             <>
                                 <div className={styles.otherButtons}>
-                                    {/* <i className="fa-solid fa-user-group"></i> */}
+                                    <i
+                                        className="fa-solid fa-paperclip"
+                                        onClick={() => {
+                                            if (roomId) {
+                                                navigator.clipboard.writeText(roomId)
+                                                    .then(() => toast.success("Copied ID to in the clipboard"))
+                                                    .catch((error) => toast.error("Failed to copy the ID"));
+                                            } else {
+                                                toast.error("Room ID not available");
+                                            }
+                                        }}
+                                        style={{ cursor: "pointer" }}
+                                    ></i>
                                     <i
                                         className="fa-solid fa-arrow-right-from-bracket"
                                         onClick={handleLeaveOrDeleteRoom}
