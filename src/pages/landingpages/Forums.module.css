@@ -7,7 +7,7 @@
 .container{
     width: 100%;
     height: 100vh;
-    background-color: rgba(246, 231, 212, 1);
+    background-color: var(--body_background);
 
     display: flex;
     justify-content: space-between;
@@ -29,8 +29,8 @@
 .footer{
     width: 100%;
     height: 10%;
-    border-top: 1px solid #AD4801;
-    color: #AD4801;
+    border-top: 1px solid var(--body_color);
+    color: var(--body_color);
 
     display: flex;
     justify-content: center;
@@ -44,7 +44,7 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    background-color: #9b3e01;
+    background-color: var(--body_origblack);
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -73,8 +73,8 @@
 
 .createpostButton{
     padding: .5rem 1rem;
-    color: black;
-    background-color: rgba(246, 231, 212, 1);
+    color: var(--body_color);
+    background-color: var(--body_background);
     border-radius: 1rem;
     cursor: pointer;
 }
@@ -104,7 +104,8 @@
     padding: 1rem;
     border-radius: 1rem;
     gap: .5rem;
-    background-color: rgba(211, 156, 112, 1);
+    background-color: var(--body_background);
+    color: var(--body_color);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -128,7 +129,7 @@
 .modalContainer{
     width: 30em;
     height: auto;
-    background-color: #F6E7D4;
+    background-color: var(--body_background);
     font-size: 1.2rem;
     padding: 1rem;
     border-radius: 5px;
@@ -158,7 +159,7 @@
     height: 150px;    
     font-size: 1rem;  
     padding: 10px;   
-    border: 1px solid rgba(246, 231, 212, 1); 
+    border: 1px solid var(--body_background); 
     border-radius: 5px;
 }
 
@@ -175,7 +176,7 @@
     top: 0;
     right: 0;
     margin: 1rem;
-    color: #9b3e01;
+    color: var(--body_color);
 }
 
 .buttonHolder{
@@ -187,7 +188,7 @@
 .postButton{
     padding: .5rem 1rem;
     border: none;
-    background-color: #9b3e01;
+    background-color: var(--body_origblack);
     color: white;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -195,8 +196,8 @@
 }
 
 .postButton:hover {
-    background-color: rgba(246, 231, 212, 1);
-    color: #9b3e01;
-    outline: 1px solid #9b3e01;
+    background-color: var(--body_background);
+    color: var(--body_color);
+    outline: 1px solid var(--body_color);
 }
 

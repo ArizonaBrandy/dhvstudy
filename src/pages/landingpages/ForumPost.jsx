@@ -99,7 +99,7 @@ function ForumPost({ user }) {
             <div className={styles.container}>
                 <div className={styles.header}>
                     <span
-                        style={{ fontSize: '2rem', color: '#9b3e01', cursor: 'pointer' }}
+                        style={{ fontSize: '2rem', color: 'var(--body_color)', cursor: 'pointer' }}
                         onClick={() => navigate('/settings')}
                     >
                         DHVSTUDY
@@ -111,7 +111,7 @@ function ForumPost({ user }) {
                         onClick={() => navigate('/home')}
                     />
                     <span
-                        style={{ fontSize: '1rem', color: '#9b3e01', fontWeight: 'bold', cursor: 'pointer' }}
+                        style={{ fontSize: '1rem', color: 'var(--body_color)', fontWeight: 'bold', cursor: 'pointer' }}
                         onClick={() => navigate('/forums')}
                     >
                         FORUMS

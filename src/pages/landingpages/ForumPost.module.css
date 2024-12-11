@@ -7,7 +7,7 @@
 .container{
     width: 100%;
     height: 100vh;
-    background-color: rgba(246, 231, 212, 1);
+    background-color: var(--body_background);
 
     display: flex;
     justify-content: space-between;
@@ -30,7 +30,7 @@
     width: 100%;
     height: 100vh;
     overflow-y: auto;
-    background-color: #9b3e01;
+    background-color: var(--body_origblack);
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -49,7 +49,7 @@
     width: 30em;
     height: auto;
     padding: 1rem;
-    background-color: rgba(246, 231, 212, 1);
+    background-color: var(--body_background);
     border-radius: 10px;
 
     display: flex;
@@ -60,9 +60,10 @@
 .commentHolder{
     width: 100%;
     height: 20em;
-    background-color: rgba(246, 231, 212, 1);
+    background-color: var(--body_background);
     overflow-y: auto;
     border: 1px solid black;
+    border-radius: 5px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -72,7 +73,7 @@
 .comment{
     width: 100%;
     padding: 1rem;
-    background-color: #9b3e01;
+    background-color: var(--body_origblack);
     border-radius: 10px;
     color: white;
     font-family: "Poppins", sans-serif;
@@ -86,7 +87,7 @@
 
 .textareaHolder{
     width: 100%;
-    background-color: #9b3e01;
+    background-color: var(--body_origblack);
     border-radius: 5px;
     padding: .5rem;
 }
@@ -98,16 +99,16 @@
     resize: none;      
     overflow-wrap: break-word; 
     word-wrap: break-word; 
-    background-color: #9b3e01;
+    background-color: var(--body_origblack);
     font-size: .8rem;  
     border-radius: 5px;
-    color: rgba(246, 231, 212, 1);
+    color: var(--body_colorDark);
     outline: none;
     border: none;
 }
 
 .replyBox::placeholder{
-    color: white;
+    color: var(--body_colorDark);
 }
 
 .buttonHolder{
@@ -119,7 +120,8 @@
 .submitButton{
     padding: .5rem 1rem;
     border: none;
-    background-color: rgba(246, 231, 212, 1);
-    color: #9b3e01;
+    background-color: var(--body_background);
+    color: var(--body_color);
     border-radius: 5px;
+    cursor: pointer;
 }

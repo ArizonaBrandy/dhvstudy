@@ -1,0 +1,19 @@
+:root{
+    --body_background: #F7E8D5;
+    --body_darkerbg: #E7AD84;
+    --body_color: #AD4801;
+    --body_origblack: #AD4801;
+    --body_colorDark: #E7AD84;
+}
+
+[data-theme="dark"]{
+    --body_background: #413D3A;
+    --body_darkerbg: #181717;
+    --body_color: #FF8D21;
+    --body_origblack: #181717;
+    --body_colorDark: #FF8D21;
+}
+
+*{
+    transition: all 0.3s ease-in-out
+}

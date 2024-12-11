@@ -3,6 +3,7 @@ import styles from "./About.module.css"
 import { useNavigate } from "react-router-dom";
 
 function About(){
+
     const navigate = useNavigate();
     return(
         <>
@@ -27,7 +28,7 @@ function About(){
                     </span>
                 </div>
                 <div className={styles.footer}>
-                    <span className={styles.footerButton} onClick={() => navigate("/")}>Home</span>
+                    <span className={styles.footerButton} onClick={()=> {navigate('/home')}}>Home</span>
                     <span>Copyright ©2024 . Designed by GR1</span>
                 </div>
             </div>

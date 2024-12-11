@@ -5,6 +5,9 @@ import dhvsuimage from '../../assets/dhvstudypic.png';
 import { auth, db } from "../../firebase/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import defaultPicture from '../../assets/defaultProfile.jpg';
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
+import DarkMode from "../../components/DarkMode";
 
 function Settings({ user }) {
     const [inProfile, setInProfile] = useState(false);
@@ -14,6 +17,12 @@ function Settings({ user }) {
     const [isEditing, setIsEditing] = useState({ username: false, about: false });
     const [editValues, setEditValues] = useState({ username: "", about: "" });
     const [selectedImage, setSelectedImage] = useState(null);
+    
+    const currentDate = new Date();
+
+    const handleDateChange = (newDate) => {
+        setDate(newDate); 
+    };
 
     useEffect(() => {
         if (user?.uid) {
@@ -119,9 +128,9 @@ function Settings({ user }) {
         <>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <span style={{ fontSize: '2rem', color: '#9b3e01' , cursor: "pointer"}} onClick={() => navigate("/settings")}>DHVSTUDY</span>
+                    <span style={{ fontSize: '2rem', color: 'var(--body_color)' , cursor: "pointer"}} onClick={() => navigate("/settings")}>DHVSTUDY</span>
                     <img src={dhvsuimage} alt="" className={styles.dhvsu} onClick={() => navigate("/home")} />
-                    <span style={{ fontSize: '1rem', color: '#9b3e01', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => navigate("/forums")}>FORUMS</span>
+                    <span style={{ fontSize: '1rem', color: 'var(--body_color)', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => navigate("/forums")}>FORUMS</span>
                 </div>
                 <div className={styles.middle}>
                     <div className={styles.middleContainer}>
@@ -167,6 +176,7 @@ function Settings({ user }) {
                                                             <input
                                                                 type="text"
                                                                 value={editValues.username}
+                                                                maxLength={25}
                                                                 onChange={(e) => handleInputChange("username", e.target.value)}
                                                                 className={styles.inputField}
                                                             />
@@ -214,10 +224,33 @@ function Settings({ user }) {
                                     </div>
                                 </div>
                             }
-                            {inDashboard && <div className={styles.dashboard}>Dashboard</div>}
+                            {inDashboard && 
+                                <>
+                                    <div className={styles.dashboard}>
+                                        <div className={styles.digitalClock}>
+                                            <span>{(new Date().getHours() % 12 || 12).toString().padStart(2, '0')}</span>
+                                            <span>{new Date().getMinutes().toString().padStart(2, '0')}</span>
+                                            <span>{new Date().getHours() >= 12 ? 'P.M' : 'A.M'}</span>
+                                        </div>
+                                        <div className={styles.otherDetails}>
+                                            <Calendar value={currentDate} />
+                                            <div className={styles.timeSpentDisplay}>
+                                                <span>Time Spent using DHVSTUDY</span>
+                                                <div className={styles.timeHolder}>
+                                                    <i className="fa-solid fa-clock"></i>
+                                                    <span>
+                                                        {`Created ${Math.floor((new Date() - new Date(currentUser.createdAt.toDate())) / (1000 * 60 * 60 * 24))} days ago`}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            }
                             {inSettings &&
                                 <div className={styles.settings}>
                                     <div className={styles.logoutHolder}>
+                                        <DarkMode/>
                                         <div className={styles.logoutButton} onClick={handleSignOut}>Sign out</div>
                                     </div>
                                 </div>

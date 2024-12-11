@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../firebase/firebase';
 import { doc, getDoc, collection, onSnapshot, query, orderBy, addDoc, updateDoc } from 'firebase/firestore';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Homepage({user}){
 
@@ -40,8 +43,8 @@ function Homepage({user}){
     }, [user?.uid]);
 
     const handleCreateRoom = async () => {
-        if (!roomName || !roomPasscode || !roomImage) {
-            alert("Please fill in all fields!");
+        if (!roomName || !roomImage) {
+            toast.warning("Please fill all fields")
             return;
         }
 
@@ -68,6 +71,7 @@ function Homepage({user}){
             setRoomImage("");
             setFileName("");
             setModalPlus(false);
+            navigate(`/room?id=${docRef.id}`);
         } catch (error) {
             console.error("Error creating room:", error);
             alert("Failed to create room. Please try again.");
@@ -90,13 +94,13 @@ function Homepage({user}){
         <>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <span style={{fontSize: '2rem', color: '#9b3e01', cursor: "pointer"}} onClick={() => navigate("/settings")}>DHVSTUDY</span>
-                    <span style={{fontSize: '1rem', color: '#9b3e01', fontWeight: 'bold', cursor: 'pointer'}} onClick={() => navigate("/forums")}>FORUMS</span>
+                    <span style={{fontSize: '2rem', color: 'var(--body_color)', cursor: "pointer"}} onClick={() => navigate("/settings")}>DHVSTUDY</span>
+                    <span style={{fontSize: '1rem', color: 'var(--body_color)', fontWeight: 'bold', cursor: 'pointer'}} onClick={() => navigate("/forums")}>FORUMS</span>
                 </div>
                 <div className={styles.middle}>
                     <div className={styles.leftBox}>
                         <div className={styles.headerCard}>
-                            <span style={{fontSize: '2.2rem', color: '#9b3e01'}}>PLACE TO STUDY AND MEETING FOR EVERYONE</span>
+                            <span style={{fontSize: '2.2rem', color: 'var(--body_color)'}}>PLACE TO STUDY AND MEETING FOR EVERYONE</span>
                             <span>connect, collaborate, and learn with DHVSTUDY</span>
                         </div>
                         <div className={styles.buttonHolder2}>
@@ -107,12 +111,7 @@ function Homepage({user}){
                     <img src={dhvsuimage} alt="Image" className={styles.rightBox} />
                 </div>
                 <div className={styles.footer}>
-                    <span
-                        className={styles.footerButton}
-                        onClick={() => navigate("/about")}
-                    >
-                        About us
-                    </span>
+                    <span style={{cursor:"pointer"}} onClick={() => {navigate("/about")}}>About us</span>
                     <span>Copyright ©2024 . Designed by GR1</span>
                 </div>
                 {modalPlus && (
@@ -172,6 +171,7 @@ function Homepage({user}){
                     </div>
                 )}
             </div>
+            <ToastContainer/>
         </>
     );
 

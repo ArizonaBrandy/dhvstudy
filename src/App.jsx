@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute';
 import ForumPost from './pages/landingpages/ForumPost';
 import Rooms from './pages/landingpages/Rooms';
 import Room from './pages/landingpages/Room';
+import DarkMode from './components/DarkMode';
 
 function App(){
 

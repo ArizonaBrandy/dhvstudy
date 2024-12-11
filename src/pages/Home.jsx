@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase/firebase"; // Ensure this is correctly configured
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
   const [loginModal, setLoginModal] = useState(false);
@@ -36,7 +38,7 @@ function Home() {
 
       const domain = "@dhvsu.edu.ph";
       if (!email.endsWith(domain)) {
-        alert(`Invalid email. Only ${domain} emails are allowed.`);
+        toast.warning("Invalid email. Only DHVSU emails are allowed.");
         return;
       }
 
@@ -48,20 +50,21 @@ function Home() {
   
       // Add user data to Firestore
       const userDoc = {
-        username: "Guest",
+        username: "Student",
         profileImage: "",
         about: "",
         email: email,
         id: userId,
+        createdAt: new Date(),
       };
   
       await setDoc(doc(db, "users", userId), userDoc);
   
-      alert("Account created successfully!");
+      toast.success("Account created successfully!");
       setRegisterModal(false);
       resetForm();
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message);
     }
   };
   
@@ -69,14 +72,12 @@ function Home() {
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Logged in successfully!");
+      toast.success("Logged in successfully!");
       navigate("/home");
     } catch (err) {
-      setError(err.message);
+      toast.error("Error logging in: ");
     }
   };
-
-  
 
   return (
     <>
@@ -219,6 +220,7 @@ function Home() {
             </div>
           </div>
         )}
+        <ToastContainer/>
       </div>
     </>
   );

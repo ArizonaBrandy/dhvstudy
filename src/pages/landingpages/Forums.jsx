@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/firebase';
 import { onSnapshot, collection, addDoc, doc, getDoc, orderBy, query } from 'firebase/firestore';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Forums({ user }) {
     const [isModalCreate, setIsModalCreate] = useState(false);
@@ -28,7 +30,7 @@ function Forums({ user }) {
                             ...userDocSnap.data(),
                         });
                     } else {
-                        console.log("User document does not exist.");
+                        
                     }
                 } catch (error) {
                     console.error("Error fetching user data:", error);
@@ -77,9 +79,9 @@ function Forums({ user }) {
             setContent("");
             setIsModalCreate(false);
             setError(null);
+            toast.success("Post created!");
         } catch (err) {
-            console.error("Error creating post:", err);
-            setError("Failed to create post. Please try again.");
+            toast.error(err.message);
         }
     };
 
@@ -88,7 +90,7 @@ function Forums({ user }) {
             <div className={styles.container}>
                 <div className={styles.header}>
                     <span
-                        style={{ fontSize: '2rem', color: '#9b3e01', cursor: 'pointer' }}
+                        style={{ fontSize: '2rem', color: 'var(--body_color)', cursor: 'pointer' }}
                         onClick={() => navigate('/settings')}
                     >
                         DHVSTUDY
@@ -99,7 +101,7 @@ function Forums({ user }) {
                         className={styles.dhvsu}
                         onClick={() => navigate('/home')}
                     />
-                    <span style={{ fontSize: '1rem', color: '#9b3e01', fontWeight: 'bold', cursor: 'pointer' }}>
+                    <span style={{ fontSize: '1rem', color: 'var(--body_color)', fontWeight: 'bold', cursor: 'pointer' }}>
                         FORUMS
                     </span>
                 </div>
@@ -112,7 +114,7 @@ function Forums({ user }) {
                     <div className={styles.postHolder}>
                         {posts.map((post) => (
                             <div key={post.id} className={styles.post} onClick={() => navigate(`/forumpost?id=${post.id}`)}>
-                                <span>{post.uploader || 'Anonymous'}</span>
+                                <span style={{fontWeight:"bold"}}>{post.uploader || 'Anonymous'}</span>
                                 <span>{post.subject || 'No subject provided'}</span>
                             </div>
                         ))}
@@ -126,7 +128,7 @@ function Forums({ user }) {
                                     className="fa-regular fa-circle-xmark"
                                     onClick={() => setIsModalCreate(false)}
                                 ></i>
-                                <span style={{ color: '#9b3e01' }}>Create a Post</span>
+                                <span style={{ color: 'var(--body_color)' }}>Create a Post</span>
                                 <input
                                     type="text"
                                     className={styles.input}
@@ -152,6 +154,7 @@ function Forums({ user }) {
                         </div>
                     </div>
                 )}
+                <ToastContainer />
             </div>
         </>
     );

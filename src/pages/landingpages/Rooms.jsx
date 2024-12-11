@@ -3,8 +3,10 @@ import styles from "./Rooms.module.css";
 import dhvsuimage from '../../assets/dhvstudypic.png';
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase/firebase";
-import { doc, getDoc, collection, onSnapshot, query, orderBy, addDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, collection, onSnapshot, query, orderBy, addDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import noImage from '../../assets/noImage.jpg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Rooms({user}){
     const [currentUser, setCurrentUser] = useState(null);
@@ -14,6 +16,9 @@ function Rooms({user}){
     const [roomPasscode, setRoomPasscode] = useState("");
     const [roomImage, setRoomImage] = useState("");
     const [fileName, setFileName] = useState("");
+    const [modalRoomCode, setModalRoomCode] = useState(false)
+    const [roomCode, setRoomCode] = useState("");
+    const [isGridChecked, setIsGridChecked] = useState(false);
     
     const navigate = useNavigate();
 
@@ -59,8 +64,8 @@ function Rooms({user}){
     
 
     const handleCreateRoom = async () => {
-        if (!roomName || !roomPasscode || !roomImage) {
-            alert("Please fill in all fields!");
+        if (!roomName || !roomImage) {
+            toast.warning("Room name and image are required!");
             return;
         }
 
@@ -74,6 +79,7 @@ function Rooms({user}){
                 roomMembers: [user?.uid],
                 chats: [],
                 createdAt: new Date(),
+                ownerName: currentUser.username,
             };
 
             const docRef = await addDoc(roomsCollection, newRoomData);
@@ -81,17 +87,52 @@ function Rooms({user}){
                 roomId: docRef.id,
             });
 
-            alert("Room created successfully!");
+            toast.success("Room created!");
             setRoomName("");
             setRoomPasscode("");
             setRoomImage("");
             setFileName("");
             setModalPlus(false);
+            navigate(`/room?id=${docRef.id}`);
         } catch (error) {
             console.error("Error creating room:", error);
-            alert("Failed to create room. Please try again.");
+            toast.error("Error creating room!");
         }
     };
+
+    const handleEnterRoomByCode = async () => {
+        if (!roomCode.trim()) {
+            toast.warning("Please enter a room code.");
+            return;
+        }
+    
+        try {
+            const roomRef = doc(db, "rooms", roomCode);
+            const roomSnap = await getDoc(roomRef);
+    
+            if (roomSnap.exists()) {
+                const roomData = roomSnap.data();
+    
+                if (roomData.roomMembers.includes(user.uid)) {
+                    toast.info("You are already a member of this room.");
+                } else {
+                    await updateDoc(roomRef, {
+                        roomMembers: arrayUnion(user.uid),
+                    });
+                    toast.success("Joined room successfully!");
+                }
+    
+                navigate(`/room?id=${roomCode}`); 
+                setModalRoomCode(false); 
+                setRoomCode(""); 
+            } else {
+                toast.error("Room code does not exist.");
+            }
+        } catch (error) {
+            console.error("Error joining room:", error);
+            toast.error("Error joining room.");
+        }
+    };    
 
     const handleFileUpload = (e) => {
         const file = e.target.files[0];
@@ -105,16 +146,20 @@ function Rooms({user}){
         }
     };
 
+    const handleCheckboxChange = () => {
+        setIsGridChecked(prevState => !prevState);
+    };
 
     return(
         <>
             <div className={styles.container}>
                 <div className={styles.plusHolder}>
                     <i className="fa-solid fa-plus" onClick={() => setModalPlus(true)}></i>
+                    <div className={styles.newbutton} onClick={() => setModalRoomCode(true)}>ENTER BY ROOM CODE</div>
                 </div>
                 <div className={styles.header}>
                     <span
-                        style={{ fontSize: '2rem', color: '#9b3e01', cursor: 'pointer' }}
+                        style={{ fontSize: '2rem', color: 'var(--body_color)', cursor: 'pointer' }}
                         onClick={() => navigate('/settings')}
                     >
                         DHVSTUDY
@@ -125,31 +170,50 @@ function Rooms({user}){
                         className={styles.dhvsu}
                         onClick={() => navigate('/home')}
                     />
-                    <span
-                        style={{ fontSize: '1rem', color: '#9b3e01', fontWeight: 'bold', cursor: 'pointer' }}
-                        onClick={() => navigate('/forums')}
-                    >
-                        FORUMS
-                    </span>
+                    <div className={styles.toGrid}>
+                        <label htmlFor="">
+                            <span>Grid</span>
+                        </label>
+                        <input 
+                            type="checkbox" 
+                            checked={isGridChecked} 
+                            onChange={handleCheckboxChange} 
+                        />
+                    </div>
                 </div>
-                <div className={styles.middle}>
+                {isGridChecked ? (
+                <div className={styles.gidLayout}>
+                    <span className={styles.gridHeader}>ROOMS</span>
                     {rooms.map((room) => (
-                        <div 
+                        <div className={styles.memberGrid}
                             key={room.id} 
-                            className={styles.roomCard} 
                             onClick={() => navigate(`/room?id=${room.id}`)} 
                         >
-                            <img 
-                                src={room.roomImage || noImage} 
-                                alt={room.roomName} 
-                                className={styles.roomImage} 
-                            />
-                            <div className={styles.textHolder}>
-                                <span>{room.roomName}</span>
-                            </div>
+                            <span>{room.roomName}</span>
+                            <span>By: {room.ownerName}</span>
                         </div>
                     ))}
                 </div>
+                ) : (
+                    <div className={styles.middle}>
+                        {rooms.map((room) => (
+                            <div 
+                                key={room.id} 
+                                className={styles.roomCard} 
+                                onClick={() => navigate(`/room?id=${room.id}`)} 
+                            >
+                                <img 
+                                    src={room.roomImage || noImage} 
+                                    alt={room.roomName} 
+                                    className={styles.roomImage} 
+                                />
+                                <div className={styles.textHolder}>
+                                    <span>{room.roomName}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 {modalPlus && (
                     <div className={styles.plusModal}>
                         <div className={styles.modalContent}>
@@ -206,6 +270,29 @@ function Rooms({user}){
                         </div>
                     </div>
                 )}
+                { modalRoomCode && (
+                    <div className={styles.plusModal}>
+                        <div className={styles.modalContent2}>
+                            <div className={styles.xbutton} onClick={()=>{setModalRoomCode(false)}}>x</div>
+
+                            <div className={styles.codeText}>Enter Room Code</div>
+                            <div className={styles.inputSection}>
+                                <input
+                                    type="text"
+                                    className={styles.inputCode}
+                                    value={roomCode}
+                                    onChange={(e) => setRoomCode(e.target.value)}
+                                    placeholder="Enter the room code"
+                                />
+                                <i 
+                                    className="fa-solid fa-circle-chevron-right" 
+                                    onClick={handleEnterRoomByCode}
+                                ></i>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                <ToastContainer />
             </div>
         </>
     );
