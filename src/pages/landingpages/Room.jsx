@@ -310,7 +310,7 @@ function Room({ user }) {
                                         onClick={() => {
                                             if (roomId) {
                                                 navigator.clipboard.writeText(roomId)
-                                                    .then(() => toast.success("Copied ID to in the clipboard"))
+                                                    .then(() => toast.success("Copied ID in the clipboard"))
                                                     .catch((error) => toast.error("Failed to copy the ID"));
                                             } else {
                                                 toast.error("Room ID not available");
